@@ -10,6 +10,7 @@
 .env*
 .next
 
+
 # next.js
 /out/
 
