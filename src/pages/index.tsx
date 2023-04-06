@@ -11,8 +11,12 @@ import { HomeContainer, Product } from "../styles/pages/home"
 import 'keen-slider/keen-slider.min.css';
 import Stripe from "stripe";
 import { Handbag } from "phosphor-react";
+import { useSelector } from "react-redux";
+import { RootState } from "../ReducerCart/reducers";
 
-interface HomeProps {
+
+
+export interface HomeProps {
   products: {
     id: string;
     name: string;
@@ -22,12 +26,16 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
+  const cart = useSelector((state: RootState) => console.log(state.cart));
+  console.log(cart)
+  
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2,
       spacing: 48,
     }
   })
+
 
   return (
     <>

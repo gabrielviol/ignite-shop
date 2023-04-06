@@ -6,8 +6,11 @@ import { useState } from "react"
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../ReducerCart/reducers"
+import { addToCart } from "../../ReducerCart/actions/cartActions"
 
-interface ProductProps {
+export interface ProductProps {
     product: {
         id: string;
         name: string;
@@ -21,25 +24,34 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
-    async function handleBuyProduct() {
-        try {
-            setIsCreatingCheckoutSession(true);
+    const cart = useSelector((state: RootState) => console.log(state.cart));
+    const dispatch = useDispatch();
 
-            const response = await axios.post('/api/checkout', {
-                priceId: product.defaultPriceId,
-            })
-
-            const { checkoutUrl } = response.data;
-
-            window.location.href = checkoutUrl
-        } catch (err) {
-            //conectar com uma ferramenta de observabilidade (Datadog/ Sentry)
-
-            setIsCreatingCheckoutSession(false);
-
-            alert('Falha ao redirecionar ao checkout!')
-        }
+    function handleBuyProduct(e){
+        e.preventDefault();
+        dispatch(addToCart())
     }
+
+
+    // async function handleBuyProduct() {
+    //     try {
+    //         setIsCreatingCheckoutSession(true);
+
+    //         const response = await axios.post('/api/checkout', {
+    //             priceId: product.defaultPriceId,
+    //         })
+
+    //         const { checkoutUrl } = response.data;
+
+    //         window.location.href = checkoutUrl
+    //     } catch (err) {
+    //         //conectar com uma ferramenta de observabilidade (Datadog/ Sentry)
+
+    //         setIsCreatingCheckoutSession(false);
+
+    //         alert('Falha ao redirecionar ao checkout!')
+    //     }
+    // }
 
     return (
         <>
