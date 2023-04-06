@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { styled } from ".."
 
 export const ProductContainer = styled('main', {
