@@ -1,3 +1,4 @@
+import { FileX } from "phosphor-react";
 import { styled } from "..";
 
 export const HomeContainer = styled('main', {
@@ -42,16 +43,35 @@ export const Product = styled('div', {
         opacity: 0,
         transition: 'all 0.2s ease-in-out',
 
-        strong: {
-            fontSize: '$lg',
-            color: '$gray100'
+        svg: {
+            display: 'flex',
+            alignItems: 'center',
+            width: '50px',
+            height: '50px',
+            padding: '10px',
+            borderRadius: '6px',
+
+            color: '#FFFFFF',
+            backgroundColor: '#00875F',
         },
 
-        span: {
-            fontSize: '$xl',
-            fontWeight: 'bold',
-            color: '$green300',
+        div: {
+            display: 'flex',
+            flexDirection: 'column',
+
+            strong: {
+                fontSize: '$lg',
+                color: '$gray100'
+            },
+    
+            span: {
+                fontSize: '$xl',
+                fontWeight: 'bold',
+                color: '$green300',
+            },
         },
+
+        
     },
 
     '&:hover': {
