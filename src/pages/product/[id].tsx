@@ -7,7 +7,6 @@ import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
 import { useSelector } from "react-redux"
-import { RootState } from "../../ReducerCart/reducers"
 
 interface ProductProps {
     product: {
@@ -22,8 +21,6 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-
-    const cart = useSelector((state: RootState) => console.log(state.cart));
 
     async function handleBuyProduct() {
         try {

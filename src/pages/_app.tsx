@@ -7,7 +7,7 @@ import { Container, Header } from "../styles/pages/app";
 import Image from 'next/future/image'
 import { Handbag } from "phosphor-react";
 import { Provider } from "react-redux";
-import store from "../ReducerCart/store";
+import store from "../store";
 
 globalStyles();
 
@@ -22,10 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <div>1</div>
           </div>
         </Header>
-        <Component {...pageProps} />
+        <Component {...pageProps} />        
       </Container>
     </Provider>
   )
 
 }
+
 

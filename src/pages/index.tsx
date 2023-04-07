@@ -12,7 +12,6 @@ import 'keen-slider/keen-slider.min.css';
 import Stripe from "stripe";
 import { Handbag } from "phosphor-react";
 import { useSelector } from "react-redux";
-import { RootState } from "../ReducerCart/reducers";
 
 
 
@@ -25,9 +24,9 @@ export interface HomeProps {
   }[]
 }
 
+
 export default function Home({ products }: HomeProps) {
-  const cart = useSelector((state: RootState) => console.log(state.cart));
-  console.log(cart)
+  
   
   const [sliderRef] = useKeenSlider({
     slides: {
@@ -36,6 +35,8 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
+  const produto = useSelector(async state => await state)
+  console.log(produto)
 
   return (
     <>
@@ -43,7 +44,7 @@ export default function Home({ products }: HomeProps) {
         <title>Home | Ignite Shop</title>
       </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
+        {/* {products.map(product => {
           return (
             <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
               <Product
@@ -61,35 +62,35 @@ export default function Home({ products }: HomeProps) {
               </Product>
             </Link>
           )
-        })}
+        })} */}
       </HomeContainer>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const response = await stripe.products.list({
-    expand: ['data.default_price']
-  })
+// export const getStaticProps: GetStaticProps = async () => {
+//   const response = await stripe.products.list({
+//     expand: ['data.default_price']
+//   })
 
-  const products = response.data.map(product => {
-    const price = product.default_price as Stripe.Price
+//   const products = response.data.map(product => {
+//     const price = product.default_price as Stripe.Price
 
-    return {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(price.unit_amount / 100),
-    }
-  })
+//     return {
+//       id: product.id,
+//       name: product.name,
+//       imageUrl: product.images[0],
+//       price: new Intl.NumberFormat('pt-BR', {
+//         style: 'currency',
+//         currency: 'BRL',
+//       }).format(price.unit_amount / 100),
+//     }
+//   })
 
-  return {
-    props: {
-      products,
-    },
-    revalidate: 60 * 60 * 2, //2h
-  }
-}
+//   return {
+//     props: {
+//       products,
+//     },
+//     revalidate: 60 * 60 * 2, //2h
+//   }
+// }
