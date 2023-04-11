@@ -1,34 +1,10 @@
-import { GetStaticProps } from "next"
-import { stripe } from "../../lib/stripe"
-import Stripe from "stripe"
-import { AppState, wrapper } from '../../store'
+import { AppState } from '../../store'
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-
-export interface HomeProps {
-    products: {
-      id: string;
-      name: string;
-      imageUrl: string;
-      price: string;
-    }[]
-  }
+import { HomeProps } from "../../pages";
 
 const initialState: HomeProps = {
-    products: [
-        {
-            id: 'string',
-            name: 'string',
-            imageUrl: 'string',
-            price: 'string'
-        },
-        {
-            id: 'string',
-            name: 'string',
-            imageUrl: 'string',
-            price: 'string'
-        }
-]
+    products: []
 }
 
 export const product = createSlice({
@@ -39,7 +15,6 @@ export const product = createSlice({
             state.products = action.payload
         },
     },
-
     extraReducers: {
         [HYDRATE]: (state, action) => {
             return {

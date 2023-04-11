@@ -1,20 +1,18 @@
-import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image"
 import Link from 'next/link'
-
+import { GetStaticProps } from "next";
+import { useDispatch, useSelector } from "react-redux";
+import Stripe from "stripe";
+import { stripe } from "../lib/stripe";
 import { useKeenSlider } from 'keen-slider/react'
 
-import { stripe } from "../lib/stripe";
-import { HomeContainer, Product } from "../styles/pages/home"
-
-import 'keen-slider/keen-slider.min.css';
-import Stripe from "stripe";
-import { Handbag } from "phosphor-react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import reducer, { selectProductsState, setProducts } from "../store/products";
 import { wrapper } from "../store";
+import { selectProductsState, setProducts } from "../store/products";
+
+import { Handbag } from "phosphor-react";
+import { HomeContainer, Product } from "../styles/pages/home"
+import 'keen-slider/keen-slider.min.css';
 
 export interface HomeProps {
   products: {
@@ -26,12 +24,6 @@ export interface HomeProps {
 }
 
 export default function Home(/*{ products }: HomeProps*/) {
-  
-  // const dispatch = useDispatch()
-  
-  // useEffect(() => {
-  //   dispatch(setProducts(products))
-  // }, [dispatch, products])
 
   const products = useSelector(selectProductsState)
   const dispatch = useDispatch()
@@ -75,7 +67,7 @@ export default function Home(/*{ products }: HomeProps*/) {
   )
 }
 
-export const getStaticProps = wrapper.getStaticProps( (store) => async ({params}) => {
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps( (store) => async ({params}) => {
   const response = await stripe.products.list({
       expand: ['data.default_price']
     })

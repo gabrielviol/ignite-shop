@@ -1,7 +1,5 @@
-import { Action, createStore } from "redux"
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"
+import { Action } from "redux"
 import { createWrapper } from "next-redux-wrapper"
-import reducers from "./reducers"
 import { product } from "./products";
 import { ThunkAction, configureStore } from "@reduxjs/toolkit"
 
