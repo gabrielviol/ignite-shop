@@ -6,14 +6,12 @@ import { Container, Header } from "../styles/pages/app";
 
 import Image from 'next/future/image'
 import { Handbag } from "phosphor-react";
-import { Provider } from "react-redux";
-import store from "../store";
+import { wrapper } from "../store";
 
 globalStyles();
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
       <Container>
         <Header>
           <Image src={logoImg} alt="" />
@@ -24,9 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
         </Header>
         <Component {...pageProps} />        
       </Container>
-    </Provider>
   )
-
 }
+
+export default wrapper.withRedux(App);
 
 

@@ -13,7 +13,8 @@ import Stripe from "stripe";
 import { Handbag } from "phosphor-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setProducts } from "../store/products";
+import reducer, { selectProductsState, setProducts } from "../store/products";
+import { wrapper } from "../store";
 
 export interface HomeProps {
   products: {
@@ -24,13 +25,17 @@ export interface HomeProps {
   }[]
 }
 
-export default function Home({ products }: HomeProps) {
+export default function Home(/*{ products }: HomeProps*/) {
   
+  // const dispatch = useDispatch()
+  
+  // useEffect(() => {
+  //   dispatch(setProducts(products))
+  // }, [dispatch, products])
+
+  const products = useSelector(selectProductsState)
   const dispatch = useDispatch()
-  
-  useEffect(() => {
-    dispatch(setProducts(products))
-  }, [dispatch, products])
+  console.log(products)
 
   const [sliderRef] = useKeenSlider({
     slides: {
@@ -64,34 +69,37 @@ export default function Home({ products }: HomeProps) {
             </Link>
           )
         })}
+
       </HomeContainer>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = wrapper.getStaticProps( (store) => async ({params}) => {
   const response = await stripe.products.list({
-    expand: ['data.default_price']
-  })
+      expand: ['data.default_price']
+    })
+  
+    const products = response.data.map(product => {
+      const price = product.default_price as Stripe.Price    
+      return {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(price.unit_amount / 100),
+      }
+    })
 
-  const products = response.data.map(product => {
-    const price = product.default_price as Stripe.Price
-
+    store.dispatch(setProducts(products))
+    console.log("State on server", store.getState());
+  
     return {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(price.unit_amount / 100),
+      props: {
+          products,
+      },
+      revalidate: 60 * 60 * 2, //2h
     }
-  })
-
-  return {
-    props: {
-      products,
-    },
-    revalidate: 60 * 60 * 2, //2h
-  }
-}
+})

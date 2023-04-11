@@ -1,25 +1,56 @@
+import { GetStaticProps } from "next"
+import { stripe } from "../../lib/stripe"
+import Stripe from "stripe"
+import { AppState, wrapper } from '../../store'
+import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
-export default function reducer(state = setProducts, action) {
-    switch (action.type){
-        case SET_PRODUCTS:
-            return action.products
-        default:
-            return state
-    }
+export interface HomeProps {
+    products: {
+      id: string;
+      name: string;
+      imageUrl: string;
+      price: string;
+    }[]
+  }
+
+const initialState: HomeProps = {
+    products: [
+        {
+            id: 'string',
+            name: 'string',
+            imageUrl: 'string',
+            price: 'string'
+        },
+        {
+            id: 'string',
+            name: 'string',
+            imageUrl: 'string',
+            price: 'string'
+        }
+]
 }
 
-export const addProduct = product => {
-    return{
-        type: 'ADD_PRODUCT',
-        product
-    }
-}
+export const product = createSlice({
+    name: 'product',
+    initialState,
+    reducers: {
+        setProducts(state, action) {
+            state.products = action.payload
+        },
+    },
 
-export const SET_PRODUCTS = 'SET_PRODUCTS'
-
-export function setProducts(products){
-    return{
-        type: SET_PRODUCTS,
-        products
+    extraReducers: {
+        [HYDRATE]: (state, action) => {
+            return {
+                ...state,
+                ...action.payload.product,
+            }
+        }
     }
-}
+})
+
+export const { setProducts } = product.actions
+export const selectProductsState = (state: AppState) => state.product.products;
+export default product.reducer;
+
