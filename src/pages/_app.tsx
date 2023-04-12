@@ -7,12 +7,13 @@ import { Container, Header } from "../styles/pages/app";
 import Image from 'next/future/image'
 import { Handbag } from "phosphor-react";
 import { wrapper } from "../store";
+import { Cart } from "./Cart";
 
 globalStyles();
 
 function App({ Component, pageProps }: AppProps) {
   return (
-      <Container>
+    <Container>
         <Header>
           <Image src={logoImg} alt="" />
           <div>
@@ -20,8 +21,9 @@ function App({ Component, pageProps }: AppProps) {
             <div>1</div>
           </div>
         </Header>
-        <Component {...pageProps} />        
-      </Container>
+      
+        <Component {...pageProps} />
+    </Container>
   )
 }
 
