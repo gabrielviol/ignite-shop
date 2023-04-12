@@ -15,6 +15,13 @@ export const Header = styled('header', {
     justifyContent: 'space-between',
     maxWidth: 1180,
     margin: '0 auto',
+    
+    button:{
+        border: 'none',
+        background: 'none',
+        color: 'white',
+        fontSize: '15px'
+    },
 
     svg: {
         display: 'flex',

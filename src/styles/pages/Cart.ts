@@ -11,6 +11,7 @@ export const Container = styled('div', {
     position: 'absolute',
     right: '0px',
     padding: '3rem',
+    zIndex: '1',
     h1:{
         marginTop: '3rem',
         marginBottom: '2rem',

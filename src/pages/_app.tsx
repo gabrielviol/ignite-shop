@@ -5,9 +5,9 @@ import logoImg from '../assets/logo.svg'
 import { Container, Header } from "../styles/pages/app";
 
 import Image from 'next/future/image'
-import { Handbag } from "phosphor-react";
 import { wrapper } from "../store";
-import { Cart } from "./Cart";
+import { Cart } from "../components/Cart";
+import { ButtonCart } from "../components/ButtonCart";
 
 globalStyles();
 
@@ -16,13 +16,10 @@ function App({ Component, pageProps }: AppProps) {
     <Container>
         <Header>
           <Image src={logoImg} alt="" />
-          <div>
-            <Handbag size={18} weight="bold" />
-            <div>1</div>
-          </div>
+          <ButtonCart/>
         </Header>
-      
-        <Component {...pageProps} />
+                     
+        <Component {...pageProps} />        
     </Container>
   )
 }
