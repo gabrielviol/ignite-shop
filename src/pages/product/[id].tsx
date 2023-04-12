@@ -6,6 +6,8 @@ import { useState } from "react"
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
+import { useDispatch, useSelector } from "react-redux"
+import { SelectCartState, addOneItem, incrementItem } from "../../store/cart"
 
 interface ProductProps {
     product: {
@@ -21,6 +23,9 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
+    const dispatch = useDispatch()
+
+    console.log(product)
     // async function handleBuyProduct() {
     //     try {
     //         setIsCreatingCheckoutSession(true);
@@ -36,7 +41,11 @@ export default function Product({ product }: ProductProps) {
     //     }
     // }
 
-    function handleBuyProduct(){
+    const items = useSelector(SelectCartState)
+    console.log(items)
+
+    function handleBuyProduct(product){
+        dispatch(addOneItem(product))
         
     }
 
@@ -55,7 +64,7 @@ export default function Product({ product }: ProductProps) {
                     <span>{product.price}</span>
                     <p>{product.description}</p>
 
-                    <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
+                    <button onClick={() => handleBuyProduct(product)}>
                         Adicionar ao carrinho
                     </button>
                 </ProductDetails>

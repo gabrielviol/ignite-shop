@@ -4,22 +4,38 @@ export const Container = styled('div', {
     width: '35%',
     height: '100%',
     backgroundColor: '$gray800',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
     position: 'absolute',
     right: '0px',
     padding: '3rem',
-    zIndex: '1',
+    zIndex: '1',   
+})
+
+export const Content = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    '& > div:first-child': {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'start',
+        div:{
+            display: 'flex',
+            justifyContent: 'end',
+            alignItems: 'end',
+            width: '100%'
+        }
+    },
     h1:{
-        marginTop: '3rem',
-        marginBottom: '2rem',
+        marginBottom: '3rem',
+    },
+    svg:{
+        cursor: 'pointer'
     }
 })
 
 export const Item = styled('div', {
     width: '100%',
+    height: '100%',
     display: 'flex',
     gap: '2rem',
     img: {
@@ -36,11 +52,9 @@ export const Item = styled('div', {
 })
 
 export const Finalize = styled('div', {
-    width: '100%',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'end',
+    justifyContent: 'space-around',
     gap: '1rem',
     div: {
         display: 'flex',
@@ -49,8 +63,7 @@ export const Finalize = styled('div', {
         
     },
     button: {
-        width: '70%',
-        margin: '0 60px',
-        marginTop: '2rem',
     }
 })
+
+
