@@ -2,13 +2,13 @@ import { Action } from "redux"
 import { createWrapper } from "next-redux-wrapper"
 import { product } from "./products";
 import { ThunkAction, configureStore } from "@reduxjs/toolkit"
-import { cart } from "./cart";
+import cartReducer  from "./cart";
 
 const makeStore = () => 
   configureStore({
     reducer: {
       [product.name] : product.reducer,
-      [cart.name] : cart.reducer,
+      cart : cartReducer,
     },
     devTools: true
   })

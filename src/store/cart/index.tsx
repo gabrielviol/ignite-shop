@@ -9,11 +9,16 @@ export interface ItemsProps {
         price: string;
         description: string;
         defaultPriceId: string;
-    }[]
+        quantatyItem: number;
+    }[],
+    totalQuantatyItem: number,
+    amountItems: number
   }
 
 const initialState: ItemsProps = {
-    items: []
+    items: [],
+    totalQuantatyItem: 0,
+    amountItems: 0,
 }
 
 
@@ -22,14 +27,17 @@ export const cart = createSlice({
     initialState,
     reducers: {
         addOneItem(state, action) {
-            state = state.items.push(action.payload)
-        },
-        incrementItem(state, action){
-            state.items.find(id => (console.log(id)))
+            const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
+            if(itemIndex >= 0){
+                state.items[itemIndex].quantatyItem ++
+            } else {
+                const qntItems = {...action.payload, quantatyItem: 1}
+                state.items.push(qntItems)
+            }    
         }
     },
 })
 
-export const { addOneItem, incrementItem } = cart.actions
+export const { addOneItem } = cart.actions
 export const SelectCartState = (state: AppState) => state.cart
 export default cart.reducer;
