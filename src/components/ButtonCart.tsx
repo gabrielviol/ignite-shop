@@ -4,7 +4,6 @@ import { SelectCartState } from "../store/cart";
 
 export function ButtonCart({ show }) {
     const items = useSelector(SelectCartState)
-    console.log(items.items)
     return (
         <>
             <button onClick={show}>

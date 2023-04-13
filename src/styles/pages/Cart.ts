@@ -6,37 +6,25 @@ export const Container = styled('div', {
     backgroundColor: '$gray800',
     position: 'absolute',
     right: '0px',
-    padding: '3rem',
+    padding: '2rem 3rem',
     zIndex: '1',   
 })
 
 export const Content = styled('div', {
     display: 'flex',
+    height: '85%',
     flexDirection: 'column',
-    height: '100%',
-    '& > div:first-child': {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'start',
-        div:{
-            display: 'flex',
-            justifyContent: 'end',
-            alignItems: 'end',
-            width: '100%'
-        }
-    },
-    h1:{
-        marginBottom: '3rem',
-    },
     svg:{
-        cursor: 'pointer'
+        cursor: 'pointer',
     }
 })
 
 export const Item = styled('div', {
     width: '100%',
-    height: '100%',
+    marginTop:'2rem',
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     gap: '2rem',
     img: {
         width: '6rem',
@@ -48,22 +36,46 @@ export const Item = styled('div', {
         display: 'flex',
         flexDirection: 'column',
         gap: '1rem',
+    },
+    button:{
+        width: '5rem',
+        cursor: 'pointer',
+        background: 'none',
+        border: 'none',
+        color: '$green500',
+        fontSize: '14px',
+        fontWeight: 'bold'
     }
 })
 
 export const Finalize = styled('div', {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    gap: '1rem',
     div: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        
+        marginBottom: '0.5rem'
     },
     button: {
+        fontSize: 'medium',
+        fontWeight: 'normal',
+        background: '$green300',
+        alignItems: 'center',
+        width: '20rem',
+        height: '3rem',
+        margin: '0 50px',
+        border: 'none',
+        borderRadius: '6px',
+        marginTop: '1rem',
+        color: '$white'
     }
 })
 
+export const RemoveAddItem = styled('span', {
+    display: 'flex',
+    gap: '1rem',
+    span:{
+        display: 'flex',
+        alignItems: 'center',
+        gap:'0.5rem'
+    }
+})
 

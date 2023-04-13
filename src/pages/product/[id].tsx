@@ -6,8 +6,9 @@ import { useState } from "react"
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
-import { useDispatch, useSelector } from "react-redux"
-import { SelectCartState, addOneItem, incrementItem } from "../../store/cart"
+import { useDispatch } from "react-redux"
+import { addOneItem } from "../../store/cart"
+import { toast } from "react-toastify"
 
 interface ProductProps {
     product: {
@@ -25,7 +26,6 @@ export default function Product({ product }: ProductProps) {
 
     const dispatch = useDispatch()
 
-    console.log(product)
     // async function handleBuyProduct() {
     //     try {
     //         setIsCreatingCheckoutSession(true);
@@ -41,12 +41,11 @@ export default function Product({ product }: ProductProps) {
     //     }
     // }
 
-    const items = useSelector(SelectCartState)
-    console.log(items)
-
     function handleBuyProduct(product){
         dispatch(addOneItem(product))
-        
+        toast.success('Item adicionado ao carrinho', {
+            position: 'bottom-left'
+        })  
     }
 
     return (

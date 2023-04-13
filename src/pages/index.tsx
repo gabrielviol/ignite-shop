@@ -26,8 +26,6 @@ export interface HomeProps {
 export default function Home(/*{ products }: HomeProps*/) {
 
   const products = useSelector(selectProductsState)
-  const dispatch = useDispatch()
-  console.log(products)
 
   const [sliderRef] = useKeenSlider({
     slides: {

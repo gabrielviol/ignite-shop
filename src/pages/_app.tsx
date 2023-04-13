@@ -1,22 +1,21 @@
 import { AppProps } from "next/app"
 import { globalStyles } from "../styles/global"
 
-import logoImg from '../assets/logo.svg'
 import { Container } from "../styles/pages/app";
 
-import Image from 'next/future/image'
 import { wrapper } from "../store";
-import { Cart } from "../components/Cart";
-import { ButtonCart } from "../components/ButtonCart";
 import { Header } from "../components/Header";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 globalStyles();
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <Container>
+    <Container>        
         <Header/>                     
-        <Component {...pageProps} />        
+        <Component {...pageProps} />  
+        <ToastContainer />      
     </Container>
   )
 }

@@ -1,23 +1,61 @@
-import { Container, Content, Finalize, Item } from "../styles/pages/Cart";
-import { X } from "phosphor-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Content, Finalize, Item, RemoveAddItem } from "../styles/pages/Cart";
+import { Minus, Plus, X } from "phosphor-react";
+import { SelectCartState, addOneItem, removeItem } from "../store/cart";
+import { toast } from "react-toastify";
 
 
 export function Cart({ close }) {
+    const cart = useSelector(SelectCartState)
+    const dispatch = useDispatch()
+    console.log(cart)
+
+    function handleRemoveItem(item) {
+        dispatch(removeItem(item))
+        toast.success('Item removido do carrinho', {
+            position: 'bottom-left'
+        })
+    }
+    function handleDecrementItem(item){
+
+    }
+    function handleIncrementItem(item){
+        dispatch(addOneItem(item))
+    }
     return (
         <Container>
-            <Content>
-                <div>
-                    <div><X size={32} weight="bold" onClick={close}/></div>
-                    <h1>Sacola de compras</h1>
-                </div>
-                <Item>
-                    <img src="https://files.stripe.com/links/MDB8YWNjdF8xTHFKWWtMN0h3eEV4VHdrfGZsX3Rlc3RfdDdKZ2JwSGJBa0dlWlh1eUpORmdPMTR200obx348I2" alt="" />
-                    <div>
-                        <span>Camiseta rockseat</span>
-                        <p>R$ 99,90</p>
-                        <button>Remover</button>
-                    </div>
-                </Item>
+            <Content>                
+                <div><X size={32} weight="bold" onClick={close} /></div>
+                <h1>Sacola de compras</h1>                
+                {cart.items.length === 0 ? (
+                    <Item>
+                        <span>Carrinho vazio</span>
+                    </Item>
+                ) :
+                    cart.items.map(item => {
+                        return (
+                            <div>
+                                <Item key={item.id}>
+                                    <img src={item.imageUrl} alt={item.name} />
+                                    <div>
+                                        <span>{item.name}</span>
+                                        <p>{(item.price) * item.quantatyItem}</p>
+                                        <RemoveAddItem>
+                                            <span>
+                                                <Minus size={12} onClick={() => handleDecrementItem(item)}/>
+                                                {item.quantatyItem}
+                                                <Plus size={12} onClick={() => handleIncrementItem(item)}/>
+                                            </span>
+                                            <button onClick={() => handleRemoveItem(item)}>Remover</button>
+                                        </RemoveAddItem>
+                                        
+                                    </div>
+                                </Item>
+                            </div>
+                        )
+                    })
+                }
+                </Content>
                 <Finalize>
                     <div>
                         <p>Quantidade</p>
@@ -29,7 +67,7 @@ export function Cart({ close }) {
                     </div>
                     <button>Finalizar compra</button>
                 </Finalize>
-            </Content>
+            
         </Container>
     )
 }
