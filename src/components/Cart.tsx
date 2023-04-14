@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Content, Finalize, Item, RemoveAddItem } from "../styles/pages/Cart";
 import { Minus, Plus, X } from "phosphor-react";
-import { SelectCartState, addOneItem, removeItem } from "../store/cart";
+import { SelectCartState, addOneItem, decrementItem, removeItem,  } from "../store/cart";
 import { toast } from "react-toastify";
 
 
@@ -17,7 +17,7 @@ export function Cart({ close }) {
         })
     }
     function handleDecrementItem(item){
-
+        dispatch(decrementItem(item))
     }
     function handleIncrementItem(item){
         dispatch(addOneItem(item))
@@ -33,13 +33,18 @@ export function Cart({ close }) {
                     </Item>
                 ) :
                     cart.items.map(item => {
+                        console.log(item.price.replace(/[^\d]/g, ""))
                         return (
                             <div>
                                 <Item key={item.id}>
                                     <img src={item.imageUrl} alt={item.name} />
                                     <div>
                                         <span>{item.name}</span>
-                                        <p>{(item.price) * item.quantatyItem}</p>
+                                        <p>{((parseFloat(
+                                                item.price.replace(/[^\d,]/g, '').
+                                                replace(',', '.'))) * item.quantatyItem).
+                                                toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) 
+                                            }</p>
                                         <RemoveAddItem>
                                             <span>
                                                 <Minus size={12} onClick={() => handleDecrementItem(item)}/>

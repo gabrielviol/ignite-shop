@@ -9,7 +9,7 @@ export function ButtonCart({ show }) {
             <button onClick={show}>
                 <div>
                     <Handbag size={18} weight="bold" />
-                    <div>{items.items.length}</div>
+                    <div>{items.amountItems}</div>
                 </div>
             </button>
         </>
