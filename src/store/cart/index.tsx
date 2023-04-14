@@ -27,7 +27,7 @@ export const cart = createSlice({
     reducers: {
         addOneItem(state, action){
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            state.amountItems ++
+            state.totalQuantatyItem ++
             if (itemIndex >= 0) {
                 state.items[itemIndex].quantatyItem++
                 console.log(state.totalQuantatyItem)
@@ -39,7 +39,7 @@ export const cart = createSlice({
         },
         removeItem(state, action){
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            state.amountItems -= state.items[itemIndex].quantatyItem
+            state.totalQuantatyItem -= state.items[itemIndex].quantatyItem
             const newState = state.items.filter(item => item.id !== action.payload.id )
             state.items = newState
         },
@@ -49,7 +49,13 @@ export const cart = createSlice({
             state.items[itemIndex].quantatyItem > 1 
             ? state.items[itemIndex].quantatyItem-- 
             : state.items = newState
-            state.amountItems --
+            state.totalQuantatyItem --
+        },
+        amountTotal(state, action){
+            const total = 0
+            state.items.map(item => {
+                
+            })
         }
     },
 })

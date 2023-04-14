@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux"
 import { addOneItem } from "../../store/cart"
 import { toast } from "react-toastify"
 
-interface ProductProps {
+export interface ProductProps {
     product: {
         id: string;
         name: string;
@@ -22,24 +22,7 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-
     const dispatch = useDispatch()
-
-    // async function handleBuyProduct() {
-    //     try {
-    //         setIsCreatingCheckoutSession(true);
-    //         const response = await axios.post('/api/checkout', {
-    //             priceId: product.defaultPriceId,
-    //         })
-    //         const { checkoutUrl } = response.data;
-    //         window.location.href = checkoutUrl
-    //     } catch (err) {
-    //         //conectar com uma ferramenta de observabilidade (Datadog/ Sentry)
-    //         setIsCreatingCheckoutSession(false);
-    //         alert('Falha ao redirecionar ao checkout!')
-    //     }
-    // }
 
     function handleBuyProduct(product){
         dispatch(addOneItem(product))
