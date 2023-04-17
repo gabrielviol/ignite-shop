@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { AppState } from "..";
+import { stat } from "fs";
 
 export interface ItemsProps {
     items: {
@@ -12,13 +13,13 @@ export interface ItemsProps {
         quantatyItem: number;
     }[],
     totalQuantatyItem: number,
-    amountItems: number
+    amountItems: string
 }
 
 const initialState: ItemsProps = {
     items: [],
     totalQuantatyItem: 0,
-    amountItems: 0,
+    amountItems: '0',
 }
 
 export const cart = createSlice({
@@ -30,7 +31,6 @@ export const cart = createSlice({
             state.totalQuantatyItem ++
             if (itemIndex >= 0) {
                 state.items[itemIndex].quantatyItem++
-                console.log(state.totalQuantatyItem)
             } else {
                 const qntItems = { ...action.payload, quantatyItem: 1 }
                 state.items.push(qntItems)
@@ -39,8 +39,8 @@ export const cart = createSlice({
         },
         removeItem(state, action){
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            state.totalQuantatyItem -= state.items[itemIndex].quantatyItem
             const newState = state.items.filter(item => item.id !== action.payload.id )
+            state.totalQuantatyItem -= state.items[itemIndex].quantatyItem
             state.items = newState
         },
         decrementItem(state, action){
@@ -52,14 +52,23 @@ export const cart = createSlice({
             state.totalQuantatyItem --
         },
         amountTotal(state, action){
-            const total = 0
-            state.items.map(item => {
-                
+            let {total, quantity} = state.items.reduce((cartTotal, cartItem) => {
+                const { price, quantatyItem } = cartItem
+                const itemTotal = quantatyItem * (parseFloat(price.replace(/[^\d,]/g, '').
+                replace(',', '.')))
+                cartTotal.total += itemTotal
+                cartTotal.quantity += quantatyItem
+                return cartTotal
+            }, {
+                total: 0,
+                quantity: 0
             })
+            state.amountItems = (total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            state.totalQuantatyItem = quantity
         }
     },
 })
 
-export const { addOneItem, removeItem, decrementItem } = cart.actions
+export const { addOneItem, removeItem, decrementItem, amountTotal } = cart.actions
 export const SelectCartState = (state: AppState) => state.cart
 export default cart.reducer;

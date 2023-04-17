@@ -20,7 +20,8 @@ export const Headerr = styled('header', {
         border: 'none',
         background: 'none',
         color: 'white',
-        fontSize: '15px'
+        fontSize: '15px',
+
     },
 
     svg: {
@@ -33,6 +34,8 @@ export const Headerr = styled('header', {
 
         color: '#C4C4CC',
         backgroundColor: '#202024',
+
+    
     },
     div : { 
         cursor: 'pointer',

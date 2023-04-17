@@ -1,4 +1,14 @@
-import { styled } from "..";
+import Link from "next/link";
+import { keyframes, styled } from "..";  
+
+export const slideIn  = keyframes({
+    '0%': { transform: 'translateX(100%)' },
+    '100%': { transform: 'translateX(0)' },
+  });
+  export const slideOut  = keyframes({
+      '100%': { transform: 'translateX(100%)'},
+      '0%': { transform: 'translateX(0)' },
+  });
 
 export const Container = styled('div', {
     width: '35%',
@@ -7,14 +17,26 @@ export const Container = styled('div', {
     position: 'absolute',
     right: '0px',
     padding: '2rem 3rem',
-    zIndex: '1',   
+    zIndex: '1',
 })
 
 export const Content = styled('div', {
     display: 'flex',
-    height: '85%',
+    height: '82%',
     flexDirection: 'column',
+    '.fechar':{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    h1:{
+        fontSize: '$2xl',
+    },
     svg:{
+        display: 'flex',
+        alignItems: 'end',
+        justifyContent: 'end',
+        right: '0',
         cursor: 'pointer',
     }
 })
@@ -44,11 +66,16 @@ export const Item = styled('div', {
         border: 'none',
         color: '$green500',
         fontSize: '14px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+
+        '&:hover': {
+            color: '$green300',
+        }
     }
 })
 
 export const Finalize = styled('div', {
+    width: '100%',
     div: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -59,13 +86,44 @@ export const Finalize = styled('div', {
         fontWeight: 'normal',
         background: '$green300',
         alignItems: 'center',
-        width: '20rem',
+        width: '100%',
         height: '3rem',
-        margin: '0 50px',
         border: 'none',
         borderRadius: '6px',
         marginTop: '1rem',
-        color: '$white'
+        color: '$white',
+        cursor:'pointer',
+        
+        '&:hover': {
+            backgroundColor: '$green500',
+        },
+
+        '&:disabled': {
+            opacity: 0.6,
+            cursor: 'not-allowed',
+        },
+
+        '&:not(:disabled)hover': {
+            backgroundColor: '$green300',
+        }
+    },
+
+    '.Link':{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        background: 'none',
+        textDecoration: 'none',
+        border: 'none',
+        color: '$green500',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        marginTop: '10px',
+
+        '&:hover': {
+            color: '$green300',
+        }
     }
 })
 
@@ -78,4 +136,3 @@ export const RemoveAddItem = styled('span', {
         gap:'0.5rem'
     }
 })
-
