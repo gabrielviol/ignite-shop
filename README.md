@@ -10,7 +10,7 @@
   <a href="#rocket-about-challenge">About challenge</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#fire-techs-and-tools">Techs and tools</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#bookmark-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#arrow_forward-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#arrow_forward-link-to-access">Link To Access</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#"></a>
 </p>
 
@@ -35,6 +35,7 @@ In this challenge, I developed an application that includes a shopping cart, whe
  ## :bookmark: Layout
 
 The layout was designed and made available by team [Rocketseat](https://www.rocketseat.com.br/) and is available on [figma](https://www.figma.com/file/FxlDRKOmznBbTH8DsTgnZU/Ignite-Shop-2.0/duplicate) for consultation
+
 <div>
 <img src="https://github.com/gabrielviol/ignite-shop/blob/4b2f756be125190edf97d79dffc75da92f8eeb69/src/assets/image1.png" width="500" height="350"/>
 <img src="https://github.com/gabrielviol/ignite-shop/blob/4b2f756be125190edf97d79dffc75da92f8eeb69/src/assets/image2.png" width="500" height="350"/>
