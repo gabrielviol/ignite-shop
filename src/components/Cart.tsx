@@ -8,6 +8,7 @@ import axios from "axios";
 import { css } from "@stitches/react";
 import { slideIn } from '../styles/pages/Cart'
 import Link from "next/link";
+import Image from "next/image";
 
 export function Cart({ close }) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
@@ -85,7 +86,7 @@ export function Cart({ close }) {
                         return (
                             <div key={item.id}>
                                 <Item >
-                                    <img src={item.imageUrl} alt={item.name} />
+                                    <Image src={item.imageUrl} alt={item.name} />
                                     <div>
                                         <span>{item.name}</span>
                                         <p>{valueItems}</p>

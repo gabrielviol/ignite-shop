@@ -10,7 +10,8 @@ interface SuccessProps {
     customerName: string;
     products: [{
         quantaty: number,
-        imageUrl: string
+        imageUrl: string,
+        key: string
     }]
 }
 
@@ -29,7 +30,7 @@ export default function Success({ customerName, products }: SuccessProps) {
                 <div>
                     {products.map(item => {
                         return (
-                            <ImageContainer>
+                            <ImageContainer key={item.key}>
                                 <Image src={item.imageUrl} width={120} height={110} alt="" />
                             </ImageContainer>
                         )
@@ -67,9 +68,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const customerName = session.customer_details.name;
     // const products = session.line_items.data[0].price.product as Stripe.Product;
     const products = session.line_items.data.map(item => {
+        const product = item.price.product as Stripe.Product;
         return {
-            imageUrl: item.price.product.images[0],
-            quantaty: item.quantity
+            imageUrl: product.images?.[0] ?? '',
+            quantaty: item.quantity,
+            key: item.id
         }
     })
 

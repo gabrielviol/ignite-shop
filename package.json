@@ -1,10 +1,12 @@
 {
   "name": "04-ignite-shop",
+  "homepage": "gabrielviol.github.io/ignite-shop",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "gh-pages -d build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.3",
     "@stitches/react": "^1.2.8",
     "axios": "^1.1.2",
+    "gh-pages": "^5.0.0",
     "keen-slider": "^6.8.2",
     "next": "12.3.1",
     "next-redux-wrapper": "^8.1.0",
