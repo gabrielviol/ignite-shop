@@ -86,7 +86,7 @@ export function Cart({ close }) {
                         return (
                             <div key={item.id}>
                                 <Item >
-                                    <Image src={item.imageUrl} alt={item.name} />
+                                    <Image className="image" src={item.imageUrl} alt={item.name} width={96} height={96} />
                                     <div>
                                         <span>{item.name}</span>
                                         <p>{valueItems}</p>

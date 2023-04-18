@@ -48,7 +48,7 @@ export const Item = styled('div', {
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: '2rem',
-    img: {
+    '.image': {
         width: '6rem',
         height: '6rem',
         background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
