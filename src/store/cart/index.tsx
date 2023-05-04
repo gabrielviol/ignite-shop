@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { AppState } from "..";
-import { stat } from "fs";
 
 export interface ItemsProps {
     items: {
@@ -26,9 +25,9 @@ export const cart = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addOneItem(state, action){
+        addOneItem(state, action) {
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            state.totalQuantatyItem ++
+            state.totalQuantatyItem++
             if (itemIndex >= 0) {
                 state.items[itemIndex].quantatyItem++
             } else {
@@ -37,25 +36,25 @@ export const cart = createSlice({
             }
             //localStorage.setItem("cartItems", JSON.stringify(state.items))
         },
-        removeItem(state, action){
+        removeItem(state, action) {
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            const newState = state.items.filter(item => item.id !== action.payload.id )
+            const newState = state.items.filter(item => item.id !== action.payload.id)
             state.totalQuantatyItem -= state.items[itemIndex].quantatyItem
             state.items = newState
         },
-        decrementItem(state, action){
+        decrementItem(state, action) {
             const itemIndex = state.items.findIndex((item) => item.id === action.payload.id)
-            const newState = state.items.filter(item => item.id !== action.payload.id ) 
-            state.items[itemIndex].quantatyItem > 1 
-            ? state.items[itemIndex].quantatyItem-- 
-            : state.items = newState
-            state.totalQuantatyItem --
+            const newState = state.items.filter(item => item.id !== action.payload.id)
+            state.items[itemIndex].quantatyItem > 1
+                ? state.items[itemIndex].quantatyItem--
+                : state.items = newState
+            state.totalQuantatyItem--
         },
-        amountTotal(state, action){
-            let {total, quantity} = state.items.reduce((cartTotal, cartItem) => {
+        amountTotal(state, action) {
+            let { total, quantity } = state.items.reduce((cartTotal, cartItem) => {
                 const { price, quantatyItem } = cartItem
                 const itemTotal = quantatyItem * (parseFloat(price.replace(/[^\d,]/g, '').
-                replace(',', '.')))
+                    replace(',', '.')))
                 cartTotal.total += itemTotal
                 cartTotal.quantity += quantatyItem
                 return cartTotal
